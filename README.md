@@ -2,7 +2,9 @@
 
 [![Event-based Stereo Parallel Tracking and Mapping](docs/mcemvs_thumbnail.jpg)](https://youtu.be/o7Bxg9XlHmg)
 
-This repository contains code for the paper [**Event-based Stereo Parallel Tracking and Mapping**](), by [Suman Ghosh](https://www.linkedin.com/in/suman-ghosh-a8762576/), [Valentina Cavinato](https://ch.linkedin.com/in/valentina-cavinato) and [Guillermo Gallego](https://sites.google.com/view/guillermogallego), published at the [ECCV Workshop on Neuromorphic Vision (NeVi) 2024](https://sites.google.com/view/nevi2024/home-page).
+This repository contains code for the paper [**Event-based Stereo Parallel Tracking and Mapping**](), by [Suman Ghosh](https://www.linkedin.com/in/suman-ghosh-a8762576/), [Valentina Cavinato](https://ch.linkedin.com/in/valentina-cavinato) and [Guillermo Gallego](https://sites.google.com/view/guillermogallego), published at the **European Conference on Computer Vision (ECCV) Workshops 2024**.
+
+If you use this work, please cite it as:
 
 ```bibtex
 @InProceedings{Ghosh22aisy,
