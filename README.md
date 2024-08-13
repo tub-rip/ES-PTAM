@@ -1,6 +1,6 @@
 # ES-PTAM: Event-based Stereo Parallel Tracking and Mapping
 
-[![ES-PTAM: Event-based Stereo Parallel Tracking and Mapping](docs/mcemvs_thumbnail.jpg)](https://youtu.be/o7Bxg9XlHmg)
+[![ES-PTAM: Event-based Stereo Parallel Tracking and Mapping](docs/es_ptam_thumbnail.jpg)](https://youtu.be/z7J3lZOYwKs)
 
 This repository contains code for the paper [**ES-PTAM: Event-based Stereo Parallel Tracking and Mapping**](), by [Suman Ghosh](https://www.linkedin.com/in/suman-ghosh-a8762576/), [Valentina Cavinato](https://ch.linkedin.com/in/valentina-cavinato) and [Guillermo Gallego](https://sites.google.com/view/guillermogallego), published at the **European Conference on Computer Vision (ECCV) Workshops 2024**, Milan, Italy.
 
