@@ -17,15 +17,14 @@ If you use this work, please cite it as:
 
 ## Data Processing Pipeline
 
-
-![pipeline](docs/block_all.png)
+![pipeline](docs/pipeline_esptam.png)
 
 ### Input
-* Events from multiple cameras
-* Pose of camera rig
-* Camera calibration (instrinsic, extrinsic, hand-eye) parameters
+* Events from two or more cameras
+* Camera calibration (intrinsic, extrinsic) parameters
 
 ### Output
+* Camera (i.e., sensor rig) poses
 * Depth map
 * Confidence map
 * Point cloud
@@ -41,7 +40,7 @@ If you use this work, please cite it as:
 
 ## License
 
-The license is available [here](Software_License_Agreement_TUB_dvs_mcemvs.pdf).
+The license is available [here](TBD).
 
 Additional Resources on Event-based Vision
 -------
