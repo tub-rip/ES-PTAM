@@ -2,14 +2,14 @@
 
 [![ES-PTAM: Event-based Stereo Parallel Tracking and Mapping](docs/es_ptam_thumbnail.jpg)](https://youtu.be/z7J3lZOYwKs)
 
-This repository contains code for the paper [**ES-PTAM: Event-based Stereo Parallel Tracking and Mapping**](), by [Suman Ghosh](https://www.linkedin.com/in/suman-ghosh-a8762576/), [Valentina Cavinato](https://ch.linkedin.com/in/valentina-cavinato) and [Guillermo Gallego](https://sites.google.com/view/guillermogallego), published at the **European Conference on Computer Vision (ECCV) Workshops 2024**, Milan, Italy.
+This repository contains code for the paper [**ES-PTAM: Event-based Stereo Parallel Tracking and Mapping**](https://arxiv.org/pdf/2408.15605), by [Suman Ghosh](https://www.linkedin.com/in/suman-ghosh-a8762576/), [Valentina Cavinato](https://ch.linkedin.com/in/valentina-cavinato) and [Guillermo Gallego](https://sites.google.com/view/guillermogallego), published at the **European Conference on Computer Vision (ECCV) Workshops 2024**, Milan, Italy.
 
-If you use this work, please cite it as:
+The [PDF of the paper is available](https://arxiv.org/pdf/2408.15605). If you use this work in your research, please cite it as follows:
 
 ```bibtex
 @InProceedings{Ghosh24eccvw,
   author = {Suman Ghosh and Valentina Cavinato and Guillermo Gallego},  
-  title = {ES-PTAM: Event-based Stereo Parallel Tracking and Mapping},
+  title = {{ES-PTAM}: Event-based Stereo Parallel Tracking and Mapping},
   booktitle = {European Conference on Computer Vision (ECCV) Workshops},
   year = {2024}
 }
@@ -45,6 +45,7 @@ The license is available [here](TBD).
 Additional Resources on Event-based Vision
 -------
 * [MC-EMVS: Multi-Event-Camera Depth Estimation and Outlier Rejection by Refocused Events Fusion](https://github.com/tub-rip/dvs_mcemvs)
+* [EVO: Event based Visual Odometry](https://github.com/uzh-rpg/rpg_dvs_evo_open/)
 * [Research page (TU Berlin RIP lab)](https://sites.google.com/view/guillermogallego/research/event-based-vision)
 * [Course at TU Berlin](https://sites.google.com/view/guillermogallego/teaching/event-based-robot-vision)
 * [Survey paper](http://rpg.ifi.uzh.ch/docs/EventVisionSurvey.pdf)
