@@ -31,12 +31,7 @@ The [PDF of the paper is available](https://arxiv.org/pdf/2408.15605). If you us
 * Intermediate ray density maps / Disparity Space Images (DSI)
 
 ## Code
-* [Installation instructions](docs/installation.md)
-* [Running the code with various configurations](docs/running.md)
-* [Datasets used](docs/datasets.md)
-* [Running Examples](docs/examples.md)
-* [Evaluation scripts](docs/evaluation.md)
-
+Coming soon ...
 
 ## License
 
