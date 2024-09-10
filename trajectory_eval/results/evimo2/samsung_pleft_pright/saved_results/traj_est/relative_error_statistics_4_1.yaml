@@ -1,0 +1,48 @@
+gravity:
+  max: 0
+  mean: 0
+  median: 0
+  min: 0
+  num_samples: 0
+  rmse: 0
+  std: 0
+rot:
+  max: 0
+  mean: 0
+  median: 0
+  min: 0
+  num_samples: 0
+  rmse: 0
+  std: 0
+rot_deg_per_m:
+  max: 0
+  mean: 0
+  median: 0
+  min: 0
+  num_samples: 0
+  rmse: 0
+  std: 0
+trans:
+  max: 0
+  mean: 0
+  median: 0
+  min: 0
+  num_samples: 0
+  rmse: 0
+  std: 0
+trans_perc:
+  max: 0
+  mean: 0
+  median: 0
+  min: 0
+  num_samples: 0
+  rmse: 0
+  std: 0
+yaw:
+  max: 0
+  mean: 0
+  median: 0
+  min: 0
+  num_samples: 0
+  rmse: 0
+  std: 0
