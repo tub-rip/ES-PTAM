@@ -35,6 +35,11 @@ The [PDF of the paper is available](https://arxiv.org/pdf/2408.15605). If you us
 ## Code
 Coming soon ...
 
+## Results
+The original ES-PTAM trajectories and GT poses for various sequences are available [here](trajectory_eval).
+
+They have been evaluted using [this tool](https://github.com/uzh-rpg/rpg_trajectory_evaluation/tree/master).
+
 ## License
 
 The license is available [here](TBD).
