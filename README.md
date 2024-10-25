@@ -44,11 +44,15 @@ They have been evaluted using [this tool](https://github.com/uzh-rpg/rpg_traject
 
 The license is available [here](TBD).
 
+Related works
+-------
+* **[Event-based Stereo Depth Estimation: A Survey](https://arxiv.org/pdf/2409.17680)**
+* **[MC-EMVS: Multi-Event-Camera Depth Estimation and Outlier Rejection by Refocused Events Fusion](https://github.com/tub-rip/dvs_mcemvs)**
+* [EVO: Event based Visual Odometry](https://github.com/uzh-rpg/rpg_dvs_evo_open/)
+   
 Additional Resources on Event-based Vision
 -------
-* [Survey paper on Stereo Depth Estimation](https://arxiv.org/abs/2409.17680)
-* [MC-EMVS: Multi-Event-Camera Depth Estimation and Outlier Rejection by Refocused Events Fusion](https://github.com/tub-rip/dvs_mcemvs)
-* [EVO: Event based Visual Odometry](https://github.com/uzh-rpg/rpg_dvs_evo_open/)
 * [Research page (TU Berlin RIP lab)](https://sites.google.com/view/guillermogallego/research/event-based-vision)
 * [Course at TU Berlin](https://sites.google.com/view/guillermogallego/teaching/event-based-robot-vision)
+* [Event-based Vision: A Survey](http://rpg.ifi.uzh.ch/docs/EventVisionSurvey.pdf)
 * [List of Resources](https://github.com/uzh-rpg/event-based_vision_resources)
