@@ -42,7 +42,7 @@ They have been evaluted using [this tool](https://github.com/uzh-rpg/rpg_traject
 
 ## License
 
-The license is available [here](TBD).
+The license is available [here](Software%20License%20Agreement_TUB_ES_PTAM_final.pdf).
 
 Related works
 -------
