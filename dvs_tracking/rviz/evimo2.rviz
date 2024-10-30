@@ -1,0 +1,407 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 0
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /TF1
+        - /TF1/Frames1
+        - /TF1/Tree1
+        - /EVO trajectory1
+        - /Events1
+      Splitter Ratio: 0.5
+    Tree Height: 441
+  - Class: rviz/Selection
+    Name: Selection
+  - Class: rviz/Tool Properties
+    Expanded:
+      - /2D Pose Estimate1
+      - /2D Nav Goal1
+      - /Publish Point1
+    Name: Tool Properties
+    Splitter Ratio: 0.5886790156364441
+  - Class: rviz/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+  - Class: rviz/Time
+    Name: Time
+    SyncMode: 0
+    SyncSource: DVS left
+  - Class: rviz/Displays
+    Help Height: 0
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /TF1/Frames1
+        - /PointCloud21
+      Splitter Ratio: 0.5
+    Tree Height: 275
+Preferences:
+  PromptSaveOnExit: true
+Toolbars:
+  toolButtonStyle: 2
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.5
+      Cell Size: 0.20000000298023224
+      Class: rviz/Grid
+      Color: 160; 160; 164
+      Enabled: false
+      Line Style:
+        Line Width: 0.029999999329447746
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 10
+      Reference Frame: <Fixed Frame>
+      Value: false
+    - Class: rviz/TF
+      Enabled: true
+      Filter (blacklist): ""
+      Filter (whitelist): ""
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        camera0:
+          Value: true
+        dvs0:
+          Value: true
+        dvs_evo_raw:
+          Value: false
+        hand:
+          Value: true
+        world:
+          Value: true
+      Marker Alpha: 1
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: false
+      Show Axes: true
+      Show Names: true
+      Tree:
+        world:
+          dvs0:
+            {}
+          dvs_evo_raw:
+            {}
+          hand:
+            camera0:
+              {}
+      Update Interval: 0
+      Value: true
+    - Class: rviz/Image
+      Enabled: false
+      Image Topic: /svo/image/0
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Bootstrap SVO
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: false
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 5.827364921569824
+        Min Value: 0.19853061437606812
+        Value: true
+      Axis: Z
+      Channel Name: z
+      Class: rviz/PointCloud2
+      Color: 98; 100; 96
+      Color Transformer: Intensity
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Min Color: 0; 0; 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.004999999888241291
+      Style: Spheres
+      Topic: /dvs_mapping/pointcloud_global
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: false
+      Value: true
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: /event_map_overlap
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Tracking
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /dvs/camera_marker
+      Name: EVO Camera
+      Namespaces:
+        "": true
+      Queue Size: 100
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 239; 41; 41
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Billboards
+      Line Width: 0.029999999329447746
+      Name: EVO trajectory
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Queue Size: 10
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /snake
+      Unreliable: false
+      Value: true
+    - Class: rviz/Image
+      Enabled: false
+      Image Topic: /dvs_rendering
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Events
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: false
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: /dvs_rendering_left
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: DVS left
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: true
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: /dvs_mapping/depthmap
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Sparse depthmap
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Min Color: 0; 0; 0
+      Name: local_map
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.009999999776482582
+      Style: Flat Squares
+      Topic: /dvs_mapping/pointcloud
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: /Confidence_Map
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: conf_map_fused
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: true
+    - Class: rviz/Image
+      Enabled: false
+      Image Topic: /projected_pointcloud
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Projected pointcloud
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: false
+    - Class: rviz/Image
+      Enabled: false
+      Image Topic: /evo/commands
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Commands
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: false
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: /Confidence_Map0
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: conf_map_center
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: true
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: /Confidence_Map1
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: conf_map_left
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: true
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: /Confidence_Map2
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: conf_map_right
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 211; 215; 207
+    Default Light: true
+    Fixed Frame: world
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/FocusCamera
+    - Class: rviz/Measure
+    - Class: rviz/SetInitialPose
+      Theta std deviation: 0.2617993950843811
+      Topic: /initialpose
+      X std deviation: 0.5
+      Y std deviation: 0.5
+    - Class: rviz/SetGoal
+      Topic: /move_base_simple/goal
+    - Class: rviz/PublishPoint
+      Single click: true
+      Topic: /clicked_point
+  Value: true
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 5.148120880126953
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.05999999865889549
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Field of View: 0.7853981852531433
+      Focal Point:
+        X: -0.6888242959976196
+        Y: 0.39327767491340637
+        Z: -0.18168547749519348
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05000000074505806
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Pitch: -0.8697970509529114
+      Target Frame: dvs0
+      Yaw: 3.4199893474578857
+    Saved: ~
+Window Geometry:
+  Bootstrap SVO:
+    collapsed: false
+  Commands:
+    collapsed: false
+  DVS left:
+    collapsed: false
+  Displays:
+    collapsed: false
+  Events:
+    collapsed: false
+  Height: 1376
+  Hide Left Dock: false
+  Hide Right Dock: false
+  Projected pointcloud:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd00000004000000000000023d000003d8fc0200000015fb000000100054007200610063006b0069006e0067010000003d0000022c0000001600fffffffc0000026f000001a60000001600fffffffa000000010100000002fb0000000a0049006d0061006700650000000000ffffffff0000000000000000fb0000001e005300700061007200730065002000640065007000740068006d00610070010000000000000156000000ac00fffffffb0000001200530065006c0065006300740069006f006e000000003d000002b00000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000280049006d0061006700650020007200650063006f006e0073007400720075006300740069006f006e00000000f5000000b30000000000000000fb0000000c004500760065006e00740073000000003d000001730000001600fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000001a0042006f006f007400730074007200610070002000530056004f0000000161000001320000001600fffffffb0000001c00440065006e00730065002000640065007000740068006d00610070000000003d0000012e0000000000000000fb0000000600530056004f0000000333000000af0000000000000000fb0000000a0049006d00610067006500000001c2000000b10000000000000000fb0000000a0049006d00610067006500000001c2000000b10000000000000000fb0000000a0049006d0061006700650000000145000000770000000000000000fb000000100044006900730070006c00610079007302000008a8000000580000015800000548fb0000000a0049006d0061006700650000000317000000cb0000000000000000fb0000002800500072006f006a00650063007400650064005f0070006f0069006e00740063006c006f007500640000000317000000cb0000000000000000fb0000002800500072006f006a0065006300740065006400200070006f0069006e00740063006c006f007500640000000392000001b10000001600ffffff0000000100000247000003d8fc0200000008fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fc0000003d0000016d000000e60100001cfa000000000100000002fb000000100044006900730070006c0061007900730100000000ffffffff0000015600fffffffb0000000a00560069006500770073010000059b0000010f0000010000fffffffb000000100044005600530020006c00650066007401000001b00000013e0000001600fffffffb0000001c0063006f006e0066005f006d00610070005f0066007500730065006401000002f4000001210000001600fffffffb000000100043006f006d006d0061006e006400730000000446000000fd0000001600fffffffb0000000a0049006d00610067006501000003b1000001830000000000000000fb0000000a0049006d00610067006501000003ab000001890000000000000000fb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000a00000000c9fc0100000002fc0000000000000a000000000000fffffffa000000000200000002fb0000000a0049006d006100670065000000003b000000c90000000000000000fb0000000a0049006d0061006700650000000000ffffffff0000000000000000fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000009cc00000128fc010000000bfb0000001a0063006f006e0066005f006d00610070005f006c0065006600740100000000000001bc0000009700fffffffb0000001e0063006f006e0066005f006d00610070005f00630065006e00740065007201000001c2000005c1000000ab00fffffffb0000001c0063006f006e0066005f006d00610070005f00720069006700680074010000078900000243000000a000fffffffb00000018004500760065006e007400730020006600720061006d006500000000d6000001850000000000000000fb00000016004400410056004900530020004600720061006d006500000001a2000000c60000000000000000fb0000000a0049006d00610067006501000000000000021c0000000000000000fb000000060044005300490000000283000002570000000000000000fb0000000a0049006d00610067006501000004ca000002750000000000000000fb0000000a0049006d00610067006501000004c9000002760000000000000000fb0000000800540069006d00650000000000000003ce0000041800fffffffb0000000800540069006d006501000000000000045000000000000000000000053c000003d800000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Selection:
+    collapsed: false
+  Sparse depthmap:
+    collapsed: false
+  Time:
+    collapsed: false
+  Tool Properties:
+    collapsed: false
+  Tracking:
+    collapsed: false
+  Views:
+    collapsed: false
+  Width: 2508
+  X: 52
+  Y: 27
+  conf_map_center:
+    collapsed: false
+  conf_map_fused:
+    collapsed: false
+  conf_map_left:
+    collapsed: false
+  conf_map_right:
+    collapsed: false

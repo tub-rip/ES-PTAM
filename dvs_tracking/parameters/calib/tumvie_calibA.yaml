@@ -1,0 +1,28 @@
+image_width: 1280
+image_height: 720
+camera_name: tumvie_calibA
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [  1049.5830934616608, 0., 634.7184038833433,
+ 0., 1049.4229746040553, 263.46974530961836,
+ 0., 0., 1.
+    ]
+distortion_model: equidistant
+distortion_coefficients:
+  rows: 1
+  cols: 4
+  data: [-0.11519655713574485, -0.06222183183004903, 0.21682612342850954, -0.23528623774744806]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [839.66650390625, 0, 634.7184038833433, 0,
+ 0, 839.53837890625, 263.4697453096184, 0,
+ 0, 0, 1, 0]
+
+
+

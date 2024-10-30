@@ -1,0 +1,29 @@
+image_width: 240
+image_height: 180
+camera_name: DAVIS-eccv18
+camera_matrix:
+  rows: 3
+  cols: 3
+  data:
+    [196.63936292910697, 0., 105.06412666477927,
+                   0., 196.7329768429481, 72.47170071387173,
+                   0., 0., 1.
+    ]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data:
+    [-0.3367326394292646, 0.11178850939644308, -0.0014005281258491276,-0.00045959441440687044, 0.]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data:
+    [156.925, 0, 108.167, 0,
+                   0, 156.925, 78.4205, 0,
+                   0, 0, 1, 0
+    ]

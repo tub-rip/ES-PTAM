@@ -1,0 +1,10 @@
+<launch>
+
+	<param name="num_ev_per_map" value="5000000" />
+    <!-- Mapping module -->
+    <node pkg="mapper_emvs_stereo" type="run_emvs" name="run_emvs" output="screen" args="--flagfile $(find mapper_emvs_stereo)/cfg/tracker/alg1/sl1.conf">
+	<remap from="pointcloud_local" to="/dvs_mapping/pointcloud" /> 
+	<remap from="pointcloud_global" to="/dvs_mapping/pointcloud_global" />
+	<remap from="Inverse_Depth_Map" to="/dvs_mapping/depthmap" />  
+    </node>
+</launch>

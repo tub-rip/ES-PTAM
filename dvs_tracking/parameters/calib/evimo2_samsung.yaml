@@ -1,0 +1,31 @@
+image_width: 640
+image_height: 480
+camera_name: evimo2_samsung
+camera_matrix:
+  rows: 3
+  cols: 3
+  data:
+    [519.638, 0., 321.661,
+                   0., 519.384, 240.727,
+                   0., 0., 1.
+    ]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 4
+  data:
+    [0.108306, -0.154485, 0.00103538, -0.000401824]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data:
+    [841.05361328125, 0, 636.1348547903337, 0,
+     0, 841.4361328125001, 265.7059221322115, 0,
+     0, 0, 1, 0]
+
+
+

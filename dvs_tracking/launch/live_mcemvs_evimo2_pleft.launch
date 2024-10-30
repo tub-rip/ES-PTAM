@@ -1,0 +1,128 @@
+<launch>
+    <arg name="auto_trigger" default="true"/> <!-- whether to automatic startup the pipeline at the first data received -->
+    <arg name="bootstrap_image_topic" default="/davis/left/image_raw" /> <!-- dvs to use standard frames (relevant for svo-based bootstrapping )-->
+    <arg name="events_topic_tri" default="/samsung/camera/events" /> 
+    <arg name="events_topic_right" default="/prophesee/right/cd_events_buffer" />
+    <arg name="events_topic" default="/prophesee/left/cd_events_buffer" /> <!-- topic used by your sensor to output events -->
+
+    <arg name="camera_name" default="evimo2_pleft" /> <!-- name of the camera and of the calibration file -->
+    <param name="camera_name" value="$(arg camera_name)" />
+    <param name="calib_file" value="$(find dvs_tracking)/parameters/calib/$(arg camera_name).yaml" />
+
+    <remap from="events" to="$(arg events_topic)" /> <!-- remap to topic used by your sensor -->
+    <remap from="remote_key" to="/evo/remote_key" /> 
+
+    <!-- <remap from="camera_info" to="/dvs/camera_info" /> -->
+
+    <param name="world_frame_id" value="world"/>
+    <param name="dvs_bootstrap_frame_id" value="camera0" /> <!-- to substitute svo, change this with the frame published by your pipeline -->
+    <param name="dvs_frame_id" value="dvs0" />
+    <param name="gt_frame_id" value="hand" />
+
+    <!-- EVO: mapping + tracking -->
+    <param name="min_depth" value="0.3" /> <!-- voxel grid minimum depth -->
+    <param name="max_depth" value="4" /> <!-- voxel grid maximum depth -->
+    <param name="num_depth_cells" value="100" /> <!-- number of depth cells in which the depth axis is divided -->
+        
+    <!-- Angle of view of the DSI (cone) -->
+    <param name="fov_virtual_camera_deg" value="80.0" />
+        
+    <!-- Number of horizontal/vertical pixels in the DSI -->
+    <param name="virtual_width" value="640" />
+    <param name="virtual_height" value="480" />
+        
+    <!-- Map expansion -->
+    <node name="trigger_map_expansion" pkg="mapper_emvs_stereo" type="trigger_map_expansion.py" output="screen" >
+        <remap from="remote_key" to="evo/remote_key" />
+        <remap from="pointcloud" to="dvs_mapping/pointcloud" />
+
+        <param name="visibility_threshold" value="0.5" /> <!-- visibility of the map below which the update is triggered -->
+        <param name="coverage_threshold" value="0.3" /> <!-- minimum amount of pixels covered by reprojected map threshold -->
+        <param name="baseline_threshold" value="0.1" /> <!-- baseline / mean depth ration above which the update is triggered -->
+        <param name="rate" value=".001" /> <!-- rate at which the node checks whether an expansion is needed -->
+        <param name="number_of_initial_maps_to_skip" value="0"/> <!-- starts checking updates conditions after this number of maps -->
+    </node> -->
+
+    <!-- Tracking module -->
+    <node name="dvs_tracking" pkg="dvs_tracking" type="dvs_tracking_ros" required="true" output="screen">
+        <param name="discard_events_when_idle" value="false"/> <!-- whether not to collect events when idle -->
+        <param name="batch_size" value="20000" /> <!-- batch-gradient descent batch size -->
+        <param name="max_iterations" value="150" /> <!-- maximum number of iterations in the optimization -->
+        <param name="pyramid_levels" value="2" /> <!-- number of pyramid levels used in the KLT process -->
+        <param name="map_blur" value="5" /> <!-- sigma of the gaussian filter applied to the reprojected map -->
+        <param name="noise_rate" value="10000" /> <!-- if events rate is below this value, the frame is skipped -->
+        <param name="frame_size" value="20000" /> <!-- window of events considered -->
+        <param name="step_size" value="20000" /> <!-- minimum number of new events to wait before a pose update -->
+        <param name="max_event_rate" value="100000000" /> <!-- events processed are randomly sampled so that the rate is below this value -->
+        <param name="pose_mean_filter_size" value="5" /> <!-- median filter size (poses are median filtered) -->
+        <param name="events_per_kf" value="20000" /> <!-- events required for a new keyframe -->
+        <param name="event_map_overlap_rate" value="15" /> <!-- publishing rate of the visualizations -->
+
+        <param name="min_map_size" value="0"/> <!-- minimum number of map points to proceed with the update -->
+        <param name="min_n_keypoints" value="0"/> <!-- minimum number of extracted keypoints (LKSE3::keypoints_) required for a reliable tracking -->
+
+        <param name="auto_trigger" value="$(arg auto_trigger)"/> <!-- whether to autotrigger the tracking when a map is received -->
+        <remap from="pointcloud" to="dvs_mapping/pointcloud" />
+    </node>
+
+    <!-- Bootstrapping -->
+    <!-- To use fronto-planar bootstrapping, uncomment the next 6 lines and comment the seventh -->
+    <!-- <node name="dvs_bootstrapping" pkg="dvs_bootstrapping" type="dvs_bootstrapping_frontoplanar_ros" output="screen"> -->
+        <!-- <remap from="pointcloud" to="dvs_mapping/pointcloud" /> -->
+        <!-- <param name="plane_distance" value="1"/> --> <!-- distance at which the events frame is reprojected -->
+        <!-- <param name="one_shot" value="true" /> --> <!-- if true, publishes only a single map before turning idle -->
+        <!-- <param name="radius_search" value="0.1" /> --> <!-- radius size of radius filter -->
+        <!-- <param name="min_num_neighbors" value="50" /> --> <!-- minimum number of neighbors for radius filtering -->
+        
+    <!-- Publish GT pose to tf frame "dvs_bootstrap_frame_id" -->
+    <!--node name="vicon_pose_to_tf" pkg="dvs_bootstrapping" type="vicon_pose_to_tf.py" output="screen">
+        <param name="source_topic_name" value="/vicon/dvs_rig" />
+        <param name="relative_to_first_pose" value="false" />
+    </node-->
+    
+    <node name="pose_to_tf" pkg="dvs_bootstrapping" type="pose_to_tf.py" output="screen">
+        <param name="source_topic_name" value="/pose" />
+        <param name="relative_to_first_pose" value="false" />
+    </node>
+    
+
+    <node name="tf_to_camera_marker" pkg="evo_utils" type="tf_to_camera_markers.py" output="screen" >
+      <param name="marker_scale" value="0.2" />
+    </node>
+    
+    <node name="snakify" pkg="evo_utils" type="snakify.py" output="screen" >
+      <param name="length" value="10000" />
+    </node>
+    
+    <node name="rqt_evo" pkg="rqt_evo" type="rqt_evo"></node> 
+        
+    <!-- visualization -->
+          <node name="dvs_renderer_left" pkg="dvs_renderer_advanced" type="dvs_renderer_advanced">
+    <param name="color_mode" value="red-blue"/>
+    <param name="background_color" value="1"/>
+    <remap from="events" to="$(arg events_topic)" />
+    <remap from="dvs_rendering" to="dvs_rendering_left" />
+    </node>
+    
+          <node name="dvs_renderer_right" pkg="dvs_renderer_advanced" type="dvs_renderer_advanced">
+    <param name="color_mode" value="red-blue"/>
+    <param name="background_color" value="1"/>
+    <remap from="events" to="$(arg events_topic_right)" />
+    <remap from="dvs_rendering" to="dvs_rendering_right" />
+    </node>
+    
+              <node name="dvs_renderer_tri" pkg="dvs_renderer_advanced" type="dvs_renderer_advanced">
+    <param name="color_mode" value="red-blue"/>
+    <param name="background_color" value="1"/>
+    <remap from="events" to="$(arg events_topic_tri)" />
+    <remap from="dvs_rendering" to="dvs_rendering_tri" />
+    </node>
+    
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find dvs_tracking)/rviz/iros_evimo2.rviz" />
+
+
+    
+</launch>
+
+
+

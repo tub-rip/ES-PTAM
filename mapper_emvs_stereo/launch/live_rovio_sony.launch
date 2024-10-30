@@ -1,0 +1,29 @@
+<launch>
+    <arg name="auto_trigger" default="true"/> <!-- whether to automatic startup the pipeline at the first data received -->
+    <param name="world_frame_id" value="world"/>
+    <param name="dvs_bootstrap_frame_id" value="camera0" /> <!-- to substitute svo, change this with the frame published by your pipeline -->
+    <param name="dvs_frame_id" value="dvs0" />
+    <param name="num_ev_per_map" value="1000000" />
+    <param name="on_demand" value="false" />
+
+<!--include file="$(find rovio)/launch/rovio_davis_cvpr_live.launch" /-->
+<node pkg="mapper_emvs_stereo" type="run_emvs" name="run_emvs" output="screen" args="--flagfile $(find mapper_emvs_stereo)/cfg/cvpr_demo/cvpr_demo_davis_sony.conf"/>
+      <node name="dvs_renderer_left" pkg="dvs_renderer" type="dvs_renderer">
+    <param name="display_method" value="red-blue"/>
+    <remap from="events" to="/davis_left/events" />
+    <remap from="dvs_rendering" to="dvs_rendering_left" />
+    </node>
+    
+          <node name="dvs_renderer_right" pkg="dvs_renderer" type="dvs_renderer">
+    <param name="display_method" value="red-blue"/>
+    <remap from="events" to="/davis_right/events" />
+    <remap from="dvs_rendering" to="dvs_rendering_right" />
+    </node>
+    
+    
+    	<!-- Visualization -->
+	<node pkg="rviz" type="rviz" name="rviz"
+    args="-d $(find mapper_emvs_stereo)/test.rviz" />
+    <!--include file="$(find dvs_renderer)/launch/renderer_davis_stereo.launch"/-->
+    <node pkg="rqt_gui" type="rqt_gui" name="rqt_gui" args="--perspective-file $(find mapper_emvs_stereo)/mcemvs.perspective"/>
+</launch>

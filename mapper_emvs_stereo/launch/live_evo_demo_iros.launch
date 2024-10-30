@@ -1,0 +1,18 @@
+<launch>
+    <arg name="auto_trigger" default="true"/> <!-- whether to automatic startup the pipeline at the first data received -->
+   <param name="num_ev_per_map" value="1000000" />
+    <param name="on_demand" value="true" />
+    <param name="max_duration" value="4" />
+    <param name="min_duration" value="0.1" />
+    <param name="init_wait_time" value="10" />
+    <param name="auto_copilot" value="true"/>
+    <!-- Mapping module -->
+    <node pkg="mapper_emvs_stereo" type="run_emvs" name="run_emvs" output="screen" args="--flagfile $(find mapper_emvs_stereo)/cfg/cvpr_demo/cvpr_demo_davis.conf">
+	<remap from="pointcloud_local" to="/dvs_mapping/pointcloud" /> 
+	<remap from="pointcloud_global" to="/dvs_mapping/pointcloud_global" />
+	<remap from="Inverse_Depth_Map" to="/dvs_mapping/depthmap" />  
+    </node>
+
+
+    
+</launch>

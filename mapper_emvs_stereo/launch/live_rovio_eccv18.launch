@@ -1,0 +1,29 @@
+<launch>
+	    <param name="world_frame_id" value="world"/>
+    <param name="dvs_bootstrap_frame_id" value="camera0" /> <!-- to substitute svo, change this with the frame published by your pipeline -->
+    <param name="dvs_frame_id" value="dvs0" />
+<node pkg="mapper_emvs_stereo" type="run_emvs" name="run_emvs" output="screen" args="--flagfile $(find mapper_emvs_stereo)/cfg/tracker/alg1/rpg_monitor_edited.conf">
+	<!--remap from="pose" to="/rovio/pose_with_covariance_stamped"/-->
+	<!--remap from="pose" to="/optitrack/davis_stereo"/-->
+
+</node>
+
+
+      <node name="dvs_renderer_left" pkg="dvs_renderer" type="dvs_renderer">
+    <param name="display_method" value="red-blue"/>
+    <remap from="events" to="/davis/left/events" />
+    <remap from="dvs_rendering" to="dvs_rendering_left" />
+    </node>
+    
+          <node name="dvs_renderer_right" pkg="dvs_renderer" type="dvs_renderer">
+    <param name="display_method" value="red-blue"/>
+    <remap from="events" to="/davis/right/events" />
+    <remap from="dvs_rendering" to="dvs_rendering_right" />
+    </node>
+    
+    	<!-- Visualization -->
+	<node pkg="rviz" type="rviz" name="rviz"
+    args="-d $(find mapper_emvs_stereo)/test.rviz" />
+    <!--include file="$(find dvs_renderer)/launch/renderer_davis_stereo.launch"/-->
+    <node pkg="rqt_gui" type="rqt_gui" name="rqt_gui" args="--perspective-file $(find mapper_emvs_stereo)/mcemvs.perspective"/>
+</launch>
