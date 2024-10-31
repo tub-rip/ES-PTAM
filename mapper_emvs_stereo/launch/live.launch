@@ -1,7 +1,0 @@
-<launch>
-<node pkg="mapper_emvs_stereo" type="run_emvs" name="run_emvs" output="screen" args="--flagfile $(find mapper_emvs_stereo)/cfg/rpg_eccv18/monitor_edited/alg1/rpg_monitor_edited_fixedts.conf"/>
-
-	<!-- Visualization -->
-	<node pkg="rviz" type="rviz" name="rviz"
-    args="-d $(find mapper_emvs_stereo)/test.rviz" />
-</launch>

@@ -204,7 +204,7 @@ private:
   int min_num_negihbors;
 
   // Process parameters
-  std::string calib_path;
+  std::string calib_path, mocap_calib_path;
   std::string calib_type;
   int process_method;
   int num_intervals;

@@ -40,6 +40,11 @@ if(DEFINE_USE_INVERSE_DEPTH)
     add_definitions(-DUSE_INVERSE_DEPTH)
 endif(DEFINE_USE_INVERSE_DEPTH)
 
+option(DEFINE_TRI "Enable trinocular fusion" ON)
+if(DEFINE_TRI)
+    add_definitions(-DTRI)
+endif(DEFINE_TRI)
+
 cs_add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 # Executables

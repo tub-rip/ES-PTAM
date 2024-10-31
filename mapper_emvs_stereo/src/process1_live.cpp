@@ -198,20 +198,4 @@ void process_1(
     //      mapper2.dsi_.writeGridNpy((out_path+std::to_string(t_mid)+"dsi_2.npy").c_str());
     //    mapper_fused.dsi_.writeGridNpy((out_path+std::to_string(t_mid)+"dsi_fused.npy").c_str());
   }
-
-  // 3. Extract semi-dense depth map from DSI
-  //  cv::Mat depth_map, confidence_map, semidense_mask;
-
-  //  if (opts_depth_map.save_mono){
-  //      // One DSI (voted by left-camera events)
-  //      mapper0.getDepthMapFromDSI(depth_map, confidence_map, semidense_mask, opts_depth_map);
-  //      saveDepthMaps(depth_map, confidence_map, semidense_mask, dsi_shape.min_depth_, dsi_shape.max_depth_, std::string("0"), ss.str());
-  //      // Another DSI (voted by right-camera events)
-  //      mapper1.getDepthMapFromDSI(depth_map, confidence_map, semidense_mask, opts_depth_map);
-  //      saveDepthMaps(depth_map, confidence_map, semidense_mask, dsi_shape.min_depth_, dsi_shape.max_depth_, std::string("1"), ss.str());
-  //    }
-
-  // Fused DSIs
-  //  mapper_fused.getDepthMapFromDSI(depth_map, confidence_map, semidense_mask, opts_depth_map);
-  //  saveDepthMaps(depth_map, confidence_map, semidense_mask, dsi_shape.min_depth_, dsi_shape.max_depth_, std::string("fused_" + std::to_string(fusion_method)), ss.str());
 }

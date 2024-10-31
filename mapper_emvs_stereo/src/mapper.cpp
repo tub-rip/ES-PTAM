@@ -65,7 +65,8 @@ onlineMapper::onlineMapper(const ros::NodeHandle &nh,
     //  nh.param<double>("radius_search", radius_search, 0.05);
     //  nh.param<int>("min_num_negihbors", min_num_negihbors, 3);
 
-    //  nh.param<std::string>("calib_path", calib_path, "./");
+      nh.param<std::string>("calib_path", calib_path, std::string("./"));
+      nh.param<std::string>("mocap_calib_path", mocap_calib_path, std::string("./"));
     //  nh.param<std::string>("calib_type", calib_type, "yaml");
     //  nh.param<int>("process_method", process_method, 1);
     //  nh.param<int>("num_intervals", num_intervals, 2);
@@ -142,31 +143,31 @@ void onlineMapper::calibrate(){
     else if(FLAGS_calib_type == "dvsgen3")
         get_camera_calib_DVS_Gen3(cam0, cam1, mat4_1_0, mat4_hand_eye);
     else if(FLAGS_calib_type == "yaml")
-        get_camera_calib_yaml(cam0, cam1, mat4_1_0, mat4_hand_eye, FLAGS_calib_path);
+        get_camera_calib_yaml(cam0, cam1, mat4_1_0, mat4_hand_eye, calib_path);
     else if(FLAGS_calib_type == "yaml_mvsec")
-        get_camera_calib_yaml_mvsec(cam0, cam1, mat4_1_0, mat4_hand_eye, FLAGS_calib_path);
+        get_camera_calib_yaml_mvsec(cam0, cam1, mat4_1_0, mat4_hand_eye, calib_path);
     else if(FLAGS_calib_type == "slider")
-        get_camera_calib_slider(cam0, cam1, mat4_1_0, mat4_hand_eye, FLAGS_calib_path);
+        get_camera_calib_slider(cam0, cam1, mat4_1_0, mat4_hand_eye, calib_path);
     else if(FLAGS_calib_type == "hkust")
-        get_camera_calib_hkust(cam0, cam1, mat4_1_0, mat4_hand_eye, FLAGS_calib_path);
+        get_camera_calib_hkust(cam0, cam1, mat4_1_0, mat4_hand_eye, calib_path);
     else if(FLAGS_calib_type == "evimo2")
-        get_camera_calib_evimo2(cam0, cam1, cam2, mat4_1_0, mat4_2_0, mat4_hand_eye, FLAGS_calib_path);
+        get_camera_calib_evimo2(cam0, cam1, cam2, mat4_1_0, mat4_2_0, mat4_hand_eye, calib_path);
     else if(FLAGS_calib_type == "evimo2_pleft")
-        get_camera_calib_evimo2_pleft(cam0, cam1, cam2, mat4_1_0, mat4_2_0, mat4_hand_eye, FLAGS_calib_path);
+        get_camera_calib_evimo2_pleft(cam0, cam1, cam2, mat4_1_0, mat4_2_0, mat4_hand_eye, calib_path);
     else if(FLAGS_calib_type == "json")
-        get_camera_calib_json(cam0, cam1, mat4_1_0, mat4_hand_eye, FLAGS_calib_path, FLAGS_mocap_calib_path);
+        get_camera_calib_json(cam0, cam1, mat4_1_0, mat4_hand_eye, calib_path, mocap_calib_path);
     else if(FLAGS_calib_type == "dsec_yaml")
-        get_camera_calib_dsec_yaml(cam0, cam1, mat4_1_0, mat4_hand_eye, FLAGS_calib_path, FLAGS_mocap_calib_path);
+        get_camera_calib_dsec_yaml(cam0, cam1, mat4_1_0, mat4_hand_eye, calib_path, mocap_calib_path);
     else if(FLAGS_calib_type == "sl1")
-        get_camera_calib_sl1(cam0, cam1, mat4_1_0, mat4_hand_eye, FLAGS_calib_path, FLAGS_mocap_calib_path);
+        get_camera_calib_sl1(cam0, cam1, mat4_1_0, mat4_hand_eye, calib_path, mocap_calib_path);
     else if(FLAGS_calib_type == "sl1_kalibr")
-        get_camera_calib_sl1_kalibr(cam0, cam1, mat4_1_0, mat4_hand_eye, FLAGS_calib_path, FLAGS_mocap_calib_path);
+        get_camera_calib_sl1_kalibr(cam0, cam1, mat4_1_0, mat4_hand_eye, calib_path, mocap_calib_path);
     else if(FLAGS_calib_type == "sony")
-        get_camera_calib_sony(cam0, cam1, mat4_1_0, mat4_hand_eye, FLAGS_calib_path, FLAGS_mocap_calib_path);
+        get_camera_calib_sony(cam0, cam1, mat4_1_0, mat4_hand_eye, calib_path, mocap_calib_path);
     else if(FLAGS_calib_type == "demo")
-        get_camera_calib_yaml_demo(cam0, cam1, mat4_1_0, mat4_hand_eye, FLAGS_calib_path);
+        get_camera_calib_yaml_demo(cam0, cam1, mat4_1_0, mat4_hand_eye, calib_path);
     else if(FLAGS_calib_type == "rip")
-        get_camera_calib_rip(cam0, cam1, mat4_1_0, mat4_hand_eye, FLAGS_calib_path, FLAGS_mocap_calib_path);
+        get_camera_calib_rip(cam0, cam1, mat4_1_0, mat4_hand_eye, calib_path, mocap_calib_path);
     LOG(INFO) << "Finished calibrating for type: " << FLAGS_calib_type;
 
 }

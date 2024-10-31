@@ -75,7 +75,7 @@ Visualization Manager:
           Value: false
         dvs_evo_raw:
           Value: false
-        imu:
+        hand:
           Value: false
         world:
           Value: false
@@ -91,7 +91,7 @@ Visualization Manager:
             {}
           dvs_evo_raw:
             {}
-          imu:
+          hand:
             camera0:
               {}
       Update Interval: 0
@@ -320,7 +320,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 4.767207622528076
+      Distance: 5.979985237121582
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -336,9 +336,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.18979616463184357
+      Pitch: 0.40979593992233276
       Target Frame: world
-      Yaw: 5.034570217132568
+      Yaw: 3.2045645713806152
     Saved:
       - Class: rviz/Orbit
         Distance: 3.55372953414917
