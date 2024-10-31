@@ -5,10 +5,10 @@
   <description>
     Implementation of DVS tracker
   </description>
-  <maintainer email="mail@timo-horstschaefer.de">Timo Horstschaefer</maintainer>
-  <author>Timo Horstschaefer</author>
-  <license>tbd</license>
-
+  <maintainer email="guillermo.gallego@tu-berlin.de">Guillermo Gallego</maintainer>
+  <maintainer email="suman.ghosh@campus.tu-berlin.de">Guillermo Gallego</maintainer>
+  <license>see LICENSE</license>
+  
   <buildtool_depend>catkin</buildtool_depend>
   <buildtool_depend>catkin_simple</buildtool_depend>
 

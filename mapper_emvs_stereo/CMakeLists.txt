@@ -16,30 +16,22 @@ set(CMAKE_CXX_FLAGS "-O3 -fopenmp ${CMAKE_CXX_FLAGS}")
 
 set(HEADERS
   include/mapper_emvs_stereo/mapper_emvs_stereo.hpp
-  include/mapper_emvs_stereo/data_loading.hpp
   include/mapper_emvs_stereo/depth_vector.hpp
   include/mapper_emvs_stereo/trajectory.hpp
   include/mapper_emvs_stereo/geometry_utils.hpp
   include/mapper_emvs_stereo/median_filtering.hpp
   include/mapper_emvs_stereo/calib.hpp
   include/mapper_emvs_stereo/utils.hpp
-#  include/mapper_emvs_stereo/process1.hpp
   include/mapper_emvs_stereo/process1_live.hpp
-#  include/mapper_emvs_stereo/process2.hpp
-#  include/mapper_emvs_stereo/process5.hpp
   include/mapper_emvs_stereo/mapper.hpp
 )
 
 set(SOURCES
   src/mapper_emvs_stereo.cpp
-  src/data_loading.cpp
   src/median_filtering.cpp
   src/calib.cpp
   src/utils.cpp
   src/process1_live.cpp
-#  src/process1.cpp
-#  src/process2.cpp
-#  src/process5.cpp
   src/mapper.cpp
 )
 

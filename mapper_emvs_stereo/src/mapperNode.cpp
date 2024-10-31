@@ -1,3 +1,20 @@
+/*
+* \file mapperNode.cpp
+* \brief main ROS Node for mapping
+* \author (1) Suman Ghosh
+* \date 2024-09-29
+* \author (2) Valentina Cavinato
+* \date 2024-09-29
+* \author (3) Guillermo Gallego
+* \date 2024-09-29
+* Copyright/Rights of Use:
+* 2024, Technische Universität Berlin
+* Prof. Guillermo Gallego
+* Robotic Interactive Perception
+* Marchstrasse 23, Sekr. MAR 5-5
+* 10587 Berlin, Germany
+*/
+
 #include <ros/ros.h>
 #include <mapper_emvs_stereo/mapper.hpp>
 #include <csignal>

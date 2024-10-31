@@ -1,3 +1,20 @@
+/*
+* \file mapper.cpp
+* \brief performs mapping using TF transforms and stereo events
+* \author (1) Suman Ghosh
+* \date 2024-09-29
+* \author (2) Valentina Cavinato
+* \date 2024-09-29
+* \author (3) Guillermo Gallego
+* \date 2024-09-29
+* Copyright/Rights of Use:
+* 2024, Technische Universität Berlin
+* Prof. Guillermo Gallego
+* Robotic Interactive Perception
+* Marchstrasse 23, Sekr. MAR 5-5
+* 10587 Berlin, Germany
+*/
+
 #include <mapper_emvs_stereo/mapper.hpp>
 // #define TRI
 // #define DEBUG_CONF
@@ -64,29 +81,28 @@ onlineMapper::onlineMapper(const ros::NodeHandle &nh,
 #ifdef TRI
     events_tri_sub_ = nh_.subscribe<dvs_msgs::EventArray>(FLAGS_event_topic2, 0, boost::bind(&onlineMapper::eventsCallback, this, _1, boost::ref(events_tri_), FLAGS_offset2));
 #endif
+    tf_sub_ = nh_.subscribe("tf", 0, &onlineMapper::tfCallback, this);
+    copilot_sub_ = nh_.subscribe("/evo/copilot_remote", 0, &onlineMapper::copilotCallback, this);
+    remote_key_ = nh_.subscribe("/evo/remote_key", 0, &onlineMapper::remoteKeyCallback, this);
     LOG(INFO) << "Subscribing to event topic left: " << FLAGS_event_topic0;
+
     // TF
     tf_ = std::make_shared<tf::Transformer>(true, ros::Duration(100));
     tf_->setUsingDedicatedThread(true);
-    tf_sub_ = nh_.subscribe("tf", 0, &onlineMapper::tfCallback, this);
-    copilot_sub_ = nh_.subscribe("/evo/copilot_remote", 0, &onlineMapper::copilotCallback, this);
-    remote_key_ = nh_.subscribe("/evo/remote_key", 0,
-                                &onlineMapper::remoteKeyCallback, this);
 
     // result publishers
     proj_pub_ = it_.advertise("projected_pointcloud", 1);
     invDepthMap_pub_ = it_.advertise("Inverse_Depth_Map", 1);
     conf_map_pub_ = it_.advertise("Confidence_Map", 1);
+    ev_img_pub_ = it_.advertise("event_image0", 1);
+    pc_pub_ = nh_.advertise<EMVS::PointCloud>("pointcloud_local", 1);
+    pc_global_pub_ = nh_.advertise<EMVS::PointCloud>("pointcloud_global", 1);
 
 #ifdef DEBUG_CONF
     conf_map0_pub_ = it_.advertise("Confidence_Map0", 1);
     conf_map1_pub_ = it_.advertise("Confidence_Map1", 1);
     conf_map2_pub_ = it_.advertise("Confidence_Map2", 1);
 #endif
-
-    ev_img_pub_ = it_.advertise("event_image0", 1);
-    pc_pub_ = nh_.advertise<EMVS::PointCloud>("pointcloud_local", 1);
-    pc_global_pub_ = nh_.advertise<EMVS::PointCloud>("pointcloud_global", 1);
 
     calibrate();
 
@@ -176,7 +192,6 @@ void onlineMapper::tfCallback(const tf::tfMessage::ConstPtr& tf_msg) {
             tf::Transform T_hand_eye;
             tf::transformEigenToTF(Eigen::Affine3d(mat4_hand_eye), T_hand_eye);
             tf::StampedTransform stamped_T_hand_eye(T_hand_eye, tf_stamp_, "hand", bootstrap_frame_id_);
-            //            tf_->setTransform(stamped_T_hand_eye);
 
             // Broadcast hand eye transform
             broadcaster_.sendTransform(stamped_T_hand_eye);
@@ -357,8 +372,9 @@ void onlineMapper::mappingLoop(){
 #ifdef TRI
                     ev_subset_tri_ = std::vector<dvs_msgs::Event>(events_tri_.begin()+last_tracked_ev_tri-NUM_EV_PER_MAP, events_tri_.begin()+last_tracked_ev_tri);
 #endif
-
                 }
+                //                accumulateEvents(ev_subset_left_,true,event_image0_);
+                //                accumulateEvents(ev_subset_right_,true,event_image1_);
 
                 LOG(INFO)<<"------------------- Mapping at time: " << (current_ts_ - first_ev_ts).toSec() << " seconds ----------------------";
                 LOG(INFO)<<"------------------- Mapping at time: " << current_ts_ << " ---------------------";
@@ -373,7 +389,6 @@ void onlineMapper::mappingLoop(){
 #ifdef TRI
                 LOG(INFO)<<"Using third camera events from " << (ev_subset_tri_.front().ts - first_ev_ts).toSec() << "-" << (ev_subset_tri_.back().ts - first_ev_ts).toSec();
                 LOG(INFO)<<"Using third camera events from " << ev_subset_tri_.front().ts << "-" << ev_subset_tri_.back().ts;
-
 #endif
                 MappingAtTime(current_ts_, ev_subset_left_, ev_subset_right_, ev_subset_tri_, frame_id_);
 
@@ -413,11 +428,10 @@ void onlineMapper::MappingAtTime(ros::Time current_ts, std::vector<dvs_msgs::Eve
     // Build and fuse DSIs using events and camera poses
     switch( FLAGS_process_method )
     {
-    // Only fusion across stereo camera, i.e., Alg. 1 of MC-EMVS (Ghosh and Gallego, AISY 2022) is implemented here
     case 1:
-        // 1-3. Compute two DSIs (one for each camera) and fuse them
+        // Compute two DSIs (one for each camera) and fuse them.
+        // Only fusion across stereo camera, i.e., Alg. 1 of MC-EMVS (Ghosh and Gallego, AISY 2022) is implemented here
         process_1(world_frame_id_, frame_id, cam0,cam1, cam2, tf_, events_left_, events_right_, events_tri_, opts_depth_map, dsi_shape, mapper_fused, mapper0, mapper1, mapper2, FLAGS_out_path,  current_ts, FLAGS_stereo_fusion, T_rv_w_);
-
         break;
     default:
         LOG(INFO) << "Incorrect process method selected.. exiting";
@@ -456,7 +470,6 @@ void onlineMapper::publishMsgs(std::string frame_id){
     cv_ptr->image = event_image0_;
     ev_img_pub_.publish(cv_ptr->toImageMsg());
 
-
     if (invDepthMap_pub_.getNumSubscribers() > 0 || conf_map_pub_.getNumSubscribers() > 0) {
 
         // Save confidence map as an 8-bit image
@@ -478,8 +491,7 @@ void onlineMapper::publishMsgs(std::string frame_id){
         // Change the background from black to white
         for ( int i = 0; i < invdepth_on_canvas.rows; i++ ) {
             for ( int j = 0; j < invdepth_on_canvas.cols; j++ ) {
-                if ( invdepth_on_canvas.at<cv::Vec3b>(i, j) == cv::Vec3b(0, 0, 0) )
-                {
+                if ( invdepth_on_canvas.at<cv::Vec3b>(i, j) == cv::Vec3b(0, 0, 0) ) {
                     invdepth_on_canvas.at<cv::Vec3b>(i, j)[0] = 255;
                     invdepth_on_canvas.at<cv::Vec3b>(i, j)[1] = 255;
                     invdepth_on_canvas.at<cv::Vec3b>(i, j)[2] = 255;

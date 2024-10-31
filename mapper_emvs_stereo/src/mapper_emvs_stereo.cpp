@@ -2,11 +2,13 @@
 * \file mapper_emvs_stereo.cpp
 * \brief functions to create and process DSIs
 * \author (1) Suman Ghosh
-* \date 2022-09-01
-* \author (2) Guillermo Gallego
-* \date 2022-09-01
+* \date 2024-09-29
+* \author (2) Valentina Cavinato
+* \date 2024-09-29
+* \author (3) Guillermo Gallego
+* \date 2024-09-29
 * Copyright/Rights of Use:
-* 2022, Technische Universität Berlin
+* 2024, Technische Universität Berlin
 * Prof. Guillermo Gallego
 * Robotic Interactive Perception
 * Marchstrasse 23, Sekr. MAR 5-5

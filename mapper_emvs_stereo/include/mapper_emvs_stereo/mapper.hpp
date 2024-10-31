@@ -1,12 +1,26 @@
-//#include <mapper_emvs_stereo/data_loading.hpp>
+/*
+* \file mapper.hpp
+* \brief header file for the onlineMapper class
+* \author (1) Suman Ghosh
+* \date 2024-09-29
+* \author (2) Valentina Cavinato
+* \date 2024-09-29
+* \author (3) Guillermo Gallego
+* \date 2024-09-29
+* Copyright/Rights of Use:
+* 2024, Technische Universität Berlin
+* Prof. Guillermo Gallego
+* Robotic Interactive Perception
+* Marchstrasse 23, Sekr. MAR 5-5
+* 10587 Berlin, Germany
+*/
+
 #include <dvs_msgs/Event.h>
 #include <dvs_msgs/EventArray.h>
 #include <mapper_emvs_stereo/mapper_emvs_stereo.hpp>
 #include <mapper_emvs_stereo/utils.hpp>
 #include <mapper_emvs_stereo/calib.hpp>
 #include <mapper_emvs_stereo/process1_live.hpp>
-#include <mapper_emvs_stereo/process2.hpp>
-#include <mapper_emvs_stereo/process5.hpp>
 #include <image_geometry/pinhole_camera_model.h>
 
 #include <opencv2/highgui.hpp>
@@ -167,13 +181,10 @@ private:
   // online data
   std::deque<dvs_msgs::Event> events_left_, events_right_, events_tri_;
   std::map<ros::Time, geometry_utils::Transformation> poses_;
-  //    std::shared_ptr<tf::Transformer> tf_;
 
   // result
   EMVS::PointCloud::Ptr pc_, pc_global_;
   cv::Mat depth_map, confidence_map, confidence_map_0, confidence_map_1, confidence_map_2, semidense_mask;
-  //    DepthFrame::Ptr depthFramePtr_;
-  //    std::deque<std::vector<DepthPoint> > dqvDepthPoints_;
 
   // Disparity Space Image (DSI) parameters. Section 5.2 in the IJCV paper.
   double min_depth;

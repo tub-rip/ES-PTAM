@@ -2,11 +2,13 @@
 * \file calib.hpp
 * \brief header for calibration functions
 * \author (1) Suman Ghosh
-* \date 2022-09-01
-* \author (2) Guillermo Gallego
-* \date 2022-09-01
+* \date 2024-09-29
+* \author (2) Valentina Cavinato
+* \date 2024-09-29
+* \author (3) Guillermo Gallego
+* \date 2024-09-29
 * Copyright/Rights of Use:
-* 2022, Technische Universität Berlin
+* 2024, Technische Universität Berlin
 * Prof. Guillermo Gallego
 * Robotic Interactive Perception
 * Marchstrasse 23, Sekr. MAR 5-5
@@ -19,8 +21,6 @@
 #include <image_geometry/pinhole_camera_model.h>
 #include <yaml-cpp/yaml.h>
 #include <unsupported/Eigen/MatrixFunctions>
-
-// Calibration functions TEMPORARY. They should be read from input files
 
 void loadCalibInfo(const std::string &cameraSystemDir, bool bPrintCalibInfo);
 void get_camera_calib_rip(image_geometry::PinholeCameraModel& cam0,

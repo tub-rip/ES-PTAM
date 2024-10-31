@@ -116,7 +116,7 @@ Tracker::Tracker(ros::NodeHandle& nh, ros::NodeHandle nh_private)
 
     // Load camera calibration
     c_ = evo_utils::camera::loadPinholeCamera(nh);
-    LOG(INFO) << "Distortion coeffs: " << c_.distortionCoeffs();
+//    LOG(INFO) << "Distortion coeffs: " << c_.distortionCoeffs();
     postCameraLoaded();
 
     // Setup Subscribers
@@ -168,14 +168,13 @@ void Tracker::remoteCallback(const std_msgs::String::ConstPtr& msg) {
         initialize(ros::Time(0));
     else if (cmd == "reset")
     {
+        // Reset the pose, re-start tracking and update the local map
         reset();
         std_msgs::String cmd_msg;
         cmd_msg.data = "switch";
         remote_pub_.publish(cmd_msg);
         cmd_msg.data = "update";
         remote_pub_.publish(cmd_msg);
-//        cmd = "switch";
-//        initialize(ros::Time(0));
     }
     else if (cmd == "bootstrap")
         auto_trigger_ = true;
@@ -206,8 +205,8 @@ void Tracker::initialize(const ros::Time& ts) {
     while (cur_ev_ + 1 < events_.size() &&
            events_[cur_ev_].ts < TF_kf_world.stamp_)
         ++cur_ev_;
-    LOG(INFO) << "latest tf stamp: "<< TF_kf_world.stamp_;
-    LOG(INFO) << "latest event stamp: " << events_[cur_ev_].ts << "id: " << cur_ev_ << " with events size" << events_.size();
+//    LOG(INFO) << "latest tf stamp: "<< TF_kf_world.stamp_;
+//    LOG(INFO) << "latest event stamp: " << events_[cur_ev_].ts << "id: " << cur_ev_ << " with events size" << events_.size();
 
     updateMap();
 

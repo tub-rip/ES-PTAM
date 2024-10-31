@@ -1,12 +1,14 @@
 /*
 * \file utils.cpp
-* \brief utility functions like saving depth and confidence maps
+* \brief utility functions for visualizing and saving depth maps etc.
 * \author (1) Suman Ghosh
-* \date 2022-09-01
-* \author (2) Guillermo Gallego
-* \date 2022-09-01
+* \date 2024-09-29
+* \author (2) Valentina Cavinato
+* \date 2024-09-29
+* \author (3) Guillermo Gallego
+* \date 2024-09-29
 * Copyright/Rights of Use:
-* 2022, Technische Universität Berlin
+* 2024, Technische Universität Berlin
 * Prof. Guillermo Gallego
 * Robotic Interactive Perception
 * Marchstrasse 23, Sekr. MAR 5-5
@@ -14,7 +16,6 @@
 */
 
 #include <mapper_emvs_stereo/utils.hpp>
-
 #include <sstream>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
@@ -54,25 +55,10 @@ void saveDepthMaps(const cv::Mat& depth_map,
     // Save confidence map as an 8-bit image
     cv::Mat confidence_map_255;
     cv::normalize(confidence_map, confidence_map_255, 0, 255.0, cv::NORM_MINMAX, CV_32FC1);
-//    cv::imwrite(out_path + "confidence_map_" + ss_suffix.str(), confidence_map_255);
     cv::imwrite(out_path + "confidence_map_negated_" + ss_suffix.str(), 255-confidence_map_255);
 
     // Normalize depth map using given min and max depth values
     cv::Mat depth_map_255 = (depth_map - min_depth) * (255.0 / (max_depth - min_depth));
-//    cv::imwrite(out_path + "depth_map_" + ss_suffix.str(), depth_map_255);
-
-    // Save pseudo-colored depth map on white canvas
-    //    cv::Mat depthmap_8bit, depthmap_color;
-    //    depth_map_255.convertTo(depthmap_8bit, CV_8U);
-    //    cv::applyColorMap(depthmap_8bit, depthmap_color, cv::COLORMAP_RAINBOW);
-    //    cv::Mat depth_on_canvas = cv::Mat(depth_map.rows, depth_map.cols, CV_8UC3, cv::Scalar(1,1,1)*255);
-    //    depthmap_color.copyTo(depth_on_canvas, semidense_mask);
-    //    cv::imwrite(out_path + "depth_colored_" + ss_suffix.str(), depth_on_canvas);
-
-    // Save dilated colored depth map on black canvas
-    //  cv::applyColorMap(depthmap_8bit, depthmap_color, cv::COLORMAP_JET);
-    //  depth_on_canvas = cv::Mat(depth_map.rows, depth_map.cols, CV_8UC3, cv::Scalar(1,1,1)*0);
-    //  depthmap_color.copyTo(depth_on_canvas, semidense_mask);
     cv::Mat element = cv::getStructuringElement( cv::MORPH_ELLIPSE, cv::Size(3,3));
     //  cv::dilate(depth_on_canvas, depth_on_canvas, element);
     //  cv::imwrite(out_path + "depth_colored_dilated" + ss_suffix.str(), depth_on_canvas);
@@ -87,20 +73,9 @@ void saveDepthMaps(const cv::Mat& depth_map,
     cv::applyColorMap(invdepthmap_8bit, invdepthmap_color, cv::COLORMAP_JET);
     cv::Mat invdepth_on_canvas = cv::Mat(depth_map.rows, depth_map.cols, CV_8UC3, cv::Scalar(1,1,1)*0);
     invdepthmap_color.copyTo(invdepth_on_canvas, semidense_mask);
-//    cv::imwrite(out_path + "inv_depth_colored_" + ss_suffix.str(), invdepth_on_canvas);
     element = cv::getStructuringElement( cv::MORPH_ELLIPSE, cv::Size(3,3));
     cv::dilate(invdepth_on_canvas, invdepth_on_canvas, element);
     cv::imwrite(out_path + "inv_depth_colored_dilated_" + ss_suffix.str(), invdepth_on_canvas);
-
-    //    if (depth_map_dense.rows > 0)
-    //    {
-    //        // Normalize depth map using given min and max depth values
-    //        depth_map_255 = (depth_map_dense - min_depth) * (255.0 / (max_depth - min_depth));
-    //        // Save pseudo-colored depth map on white canvas
-    //        depth_map_255.convertTo(depthmap_8bit, CV_8U);
-    //        cv::applyColorMap(depthmap_8bit, depthmap_color, cv::COLORMAP_RAINBOW);
-    //        cv::imwrite(out_path + "depth_colored_dense_" + ss_suffix.str(), depthmap_color);
-    //    }
 }
 
 
