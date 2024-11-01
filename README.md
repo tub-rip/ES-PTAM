@@ -33,7 +33,8 @@ The [PDF of the paper is available](https://arxiv.org/pdf/2408.15605). If you us
 * Intermediate ray density maps / Disparity Space Images (DSI)
 
 ## Code
-Coming soon ...
+[Installation](docs/installation.md)
+[Running Examples on different datasets]()
 
 ## Results
 The original ES-PTAM trajectories and GT poses for various sequences are available [here](trajectory_eval).
