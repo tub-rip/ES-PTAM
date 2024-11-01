@@ -97,7 +97,7 @@
     <remap from="dvs_rendering" to="dvs_rendering_tri" />
     </node>
     
-    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find dvs_tracking)/rviz/iros_evimo2.rviz" />
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find dvs_tracking)/rviz/evimo2.rviz" />
 
 
     
