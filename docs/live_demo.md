@@ -2,7 +2,7 @@
 Install [ROVIO](https://github.com/ethz-asl/rovio) for bootstrapping using grayscale frames and IMU.
 Then copy the [rovio_davis_cvpr_live.launch]() file into your local ROVIO `launch` directory. 
 
-First, calibrate you stereo DAVIS cameras using [kalibr](https://github.com/ethz-asl/kalibr) and save it in your local calib paths for the mapper, tracker and ROVIO. 
+Calibrate you stereo DAVIS cameras using [kalibr](https://github.com/ethz-asl/kalibr) and save it in your local calib paths for the mapper, tracker and ROVIO. 
 For reference, check [calib_mcemvs.yaml](/mapper_emvs_stereo/calib/calib_mcemvs.yaml) in the mapper and [davis_0889.yaml](dvs_tracking/parameters/calib/davis_0889.yaml) in the tracker packages.
 Make sure the calibration paths are updated in the respective launch files for all 3 packages (mapper, tracker and ROVIO).
 
