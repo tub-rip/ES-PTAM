@@ -1,12 +1,17 @@
 # ES-PTAM: Event-based Stereo Parallel Tracking and Mapping
 
+Official repository for [**ES-PTAM: Event-based Stereo Parallel Tracking and Mapping**](https://arxiv.org/pdf/2408.15605), by [Suman Ghosh](https://www.linkedin.com/in/suman-ghosh-a8762576/), [Valentina Cavinato](https://ch.linkedin.com/in/valentina-cavinato) and [Guillermo Gallego](https://sites.google.com/view/guillermogallego), published at the **European Conference on Computer Vision (ECCV) Workshops 2024** Milan, Italy.
+<h1 align="center">
+  
+[Paper](https://arxiv.org/pdf/2408.15605) | [Video](https://youtu.be/z7J3lZOYwKs) | [Poster](/docs/esptam_eccvw_2024_poster_v3.pdf)
+</h1>
+
 [![ES-PTAM: Event-based Stereo Parallel Tracking and Mapping](docs/es_ptam_thumbnail.jpg)](https://youtu.be/z7J3lZOYwKs)
 
-Official repository for [**ES-PTAM: Event-based Stereo Parallel Tracking and Mapping**](https://arxiv.org/pdf/2408.15605), by [Suman Ghosh](https://www.linkedin.com/in/suman-ghosh-a8762576/), [Valentina Cavinato](https://ch.linkedin.com/in/valentina-cavinato) and [Guillermo Gallego](https://sites.google.com/view/guillermogallego), published at the **European Conference on Computer Vision (ECCV) Workshops 2024** Milan, Italy.
+:sparkles: It was presented as an **Oral Spotlight** at the [NeVi](https://sites.google.com/view/nevi2024/home-page) Workshop.\
+:sparkles: A [live demo](https://x.com/MarcoCristani/status/1841388758299443596/photo/1) was also presented at **ECCV 2024**.
 
-It has been accepted as a **Spotlight** paper at the [NeVi](https://sites.google.com/view/nevi2024/home-page) Workshop.
-
-The [PDF of the paper is available](https://arxiv.org/pdf/2408.15605). If you use this work in your research, please cite it as follows:
+If you use this work in your research, please cite it as follows:
 
 ```bibtex
 @InProceedings{Ghosh24eccvw,
@@ -47,11 +52,15 @@ They have been evaluted using [this tool](https://github.com/uzh-rpg/rpg_traject
 
 The license is available [here](TBD).
 
+Related works
+-------
+* **[Event-based Stereo Depth Estimation: A Survey](https://arxiv.org/pdf/2409.17680)**
+* **[MC-EMVS: Multi-Event-Camera Depth Estimation and Outlier Rejection by Refocused Events Fusion](https://github.com/tub-rip/dvs_mcemvs)**
+* [EVO: Event based Visual Odometry](https://github.com/uzh-rpg/rpg_dvs_evo_open/)
+   
 Additional Resources on Event-based Vision
 -------
-* [MC-EMVS: Multi-Event-Camera Depth Estimation and Outlier Rejection by Refocused Events Fusion](https://github.com/tub-rip/dvs_mcemvs)
-* [EVO: Event based Visual Odometry](https://github.com/uzh-rpg/rpg_dvs_evo_open/)
 * [Research page (TU Berlin RIP lab)](https://sites.google.com/view/guillermogallego/research/event-based-vision)
 * [Course at TU Berlin](https://sites.google.com/view/guillermogallego/teaching/event-based-robot-vision)
-* [Survey paper](http://rpg.ifi.uzh.ch/docs/EventVisionSurvey.pdf)
+* [Event-based Vision: A Survey](http://rpg.ifi.uzh.ch/docs/EventVisionSurvey.pdf)
 * [List of Resources](https://github.com/uzh-rpg/event-based_vision_resources)
