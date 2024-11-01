@@ -1,12 +1,17 @@
 # ES-PTAM: Event-based Stereo Parallel Tracking and Mapping
 
+Official repository for [**ES-PTAM: Event-based Stereo Parallel Tracking and Mapping**](https://arxiv.org/pdf/2408.15605), by [Suman Ghosh](https://www.linkedin.com/in/suman-ghosh-a8762576/), [Valentina Cavinato](https://ch.linkedin.com/in/valentina-cavinato) and [Guillermo Gallego](https://sites.google.com/view/guillermogallego), published at the **European Conference on Computer Vision (ECCV) Workshops 2024** Milan, Italy.
+<h1 align="center">
+  
+[Paper](https://arxiv.org/pdf/2408.15605) | [Video](https://youtu.be/z7J3lZOYwKs) | [Poster](/docs/esptam_eccvw_2024_poster_v3.pdf)
+</h1>
+
 [![ES-PTAM: Event-based Stereo Parallel Tracking and Mapping](docs/es_ptam_thumbnail.jpg)](https://youtu.be/z7J3lZOYwKs)
 
-Official repository for [**ES-PTAM: Event-based Stereo Parallel Tracking and Mapping**](https://arxiv.org/pdf/2408.15605), by [Suman Ghosh](https://www.linkedin.com/in/suman-ghosh-a8762576/), [Valentina Cavinato](https://ch.linkedin.com/in/valentina-cavinato) and [Guillermo Gallego](https://sites.google.com/view/guillermogallego), published at the **European Conference on Computer Vision (ECCV) Workshops 2024** Milan, Italy.
+:sparkles: It was presented as an **Oral Spotlight** at the [NeVi](https://sites.google.com/view/nevi2024/home-page) Workshop.\
+:sparkles: A [live demo](https://x.com/MarcoCristani/status/1841388758299443596/photo/1) was also presented at **ECCV 2024**.
 
-It has been accepted as a **Spotlight** paper at the [NeVi](https://sites.google.com/view/nevi2024/home-page) Workshop.
-
-The [PDF of the paper is available](https://arxiv.org/pdf/2408.15605). If you use this work in your research, please cite it as follows:
+If you use this work in your research, please cite it as follows:
 
 ```bibtex
 @InProceedings{Ghosh24eccvw,
@@ -33,7 +38,10 @@ The [PDF of the paper is available](https://arxiv.org/pdf/2408.15605). If you us
 * Intermediate ray density maps / Disparity Space Images (DSI)
 
 ## Code
-Coming soon ...
+* [Installation](docs/installation.md)
+* [Running examples on different datasets](docs/examples.md)
+* [Running live with DAVIS cameras](docs/live_demo.md)
+* [Parameter tuning](docs/parameters.md)
 
 ## Results
 The original ES-PTAM trajectories and GT poses for various sequences are available [here](trajectory_eval).
@@ -42,7 +50,7 @@ They have been evaluted using [this tool](https://github.com/uzh-rpg/rpg_traject
 
 ## License
 
-The license is available [here](Software%20License%20Agreement_TUB_ES_PTAM_final.pdf).
+The license is available [here](TBD).
 
 Related works
 -------

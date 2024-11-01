@@ -1,0 +1,18 @@
+<launch>
+
+    <param name="num_ev_per_map" value="5000000" />
+    <param name="on_demand" value="false" />
+    <param name="max_duration" value="0.5" />
+    <param name="min_duration" value="0.02" />
+    <param name="init_wait_time" value="0.2" />
+    <param name="auto_copilot" value="true"/>
+    <param name="calib_path" value="$(find mapper_emvs_stereo)/calib/tum-vie/camera-calibrationB.json"/>
+    <param name="mocap_calib_path" value="$(find mapper_emvs_stereo)/calib/tum-vie/mocap-imu-calibrationB.json"/>
+    
+    <!-- Mapping module -->
+    <node pkg="mapper_emvs_stereo" type="run_emvs" name="run_emvs" output="screen" args="--flagfile $(find mapper_emvs_stereo)/cfg/tracker/alg1/tum-vie.conf">
+	<remap from="pointcloud_local" to="/dvs_mapping/pointcloud" /> 
+	<remap from="pointcloud_global" to="/dvs_mapping/pointcloud_global" />
+	<remap from="Inverse_Depth_Map" to="/dvs_mapping/depthmap" />  
+    </node>
+</launch>

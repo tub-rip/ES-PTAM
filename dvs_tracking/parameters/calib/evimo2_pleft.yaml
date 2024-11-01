@@ -1,0 +1,27 @@
+image_width: 640
+image_height: 480
+camera_name: evimo2_pleft
+camera_matrix:
+  rows: 3
+  cols: 3
+  data:
+   [558.417, 0, 324.905,
+0, 557.475, 225.3,
+0, 0, 1]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 4
+  data:
+    [-0.115993, 0.204851, -0.00217161, 0.000676025]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data:
+   [555.0037841796875, 0, 324.5007488306655, 0, 
+  0, 553.6369018554688, 224.3097341516386, 0,
+  0, 0, 1, 0]

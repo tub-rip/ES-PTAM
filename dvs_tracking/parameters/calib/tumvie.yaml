@@ -1,0 +1,31 @@
+image_width: 1280
+image_height: 720
+camera_name: tumvie
+camera_matrix:
+  rows: 3
+  cols: 3
+  data:
+    [1051.3170714099033, 0., 636.1348547903337,
+                   0., 1051.7952009807022, 265.7059221322115,
+                   0., 0., 1.
+    ]
+distortion_model: equidistant
+distortion_coefficients:
+  rows: 1
+  cols: 4
+  data:
+    [-0.13104704164707634, 0.07279844505754081, -0.21109298825047648, 0.18493426446978858]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data:
+    [841.05361328125, 0, 636.1348547903337, 0,
+     0, 841.4361328125001, 265.7059221322115, 0,
+     0, 0, 1, 0]
+
+
+

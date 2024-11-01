@@ -1,0 +1,31 @@
+image_width: 640
+image_height: 480
+camera_name: DSEC
+camera_matrix:
+  rows: 3
+  cols: 3
+  data:
+    [553.4686750102932, 0., 346.65339162053317,
+                   0., 553.3994078799127, 216.52092103243012,
+                   0., 0., 1.
+    ]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data:
+    [-0.09356476362537607, 0.19445779814646236, 7.642434980998821e-05, 0.0019563864604273664, 0.]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data:
+    [553.4686750102932, 0., 346.65339162053317, 0,
+                   0., 553.3994078799127, 216.52092103243012, 0,
+                   0., 0., 1., 0.
+    ]
+
+
