@@ -32,7 +32,7 @@ Run the tracking and mapping nodes using the following launch files.
 
 Play the ROSBag file
 
-    rosbag play rpg_monitor_edited.bag -r 0.5 --clock
+    rosbag play rpg_monitor_edited.bag -r 0.4 --clock
 
 ### DSEC
 
@@ -52,7 +52,7 @@ Play the ROSBag file. \
 Make sure that the ROS topics are according to what is expected in the launch files. If using the pre-package bag files above, they need to be remapped during playing.\
 You also need to align the playing of the events and pose ROSBags, hence the offset needs to be set using the `-s` flag.
 
-    rosbag play dsec_zurich_city_04_a.bag zurich_city_04-odometry/pose.bag /davis/left/events:=/dvs/left/events /davis/right/events:=/dvs/right/events -r 0.01 -s 132 -u 34 --clock
+    rosbag play dsec_zurich_city_04_a.bag zurich_city_04-odometry/pose.bag /davis/left/events:=/dvs/left/events /davis/right/events:=/dvs/right/events -r 0.02 -s 132 -u 34 --clock
 
 For other sequences of zurich_city_04, the offset `-s` and duration `-u` can be computed using the `start_end_time.yaml` files provided in [our output trajectories](/trajectory_eval/results/dsec) and GT pose timestamps.
 
