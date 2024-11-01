@@ -1,4 +1,6 @@
 # Running the demo live
+![ES-PTAM live demo](/docs/esptam_demo_screenshot.png)
+
 Install [ROVIO](https://github.com/ethz-asl/rovio) for bootstrapping using grayscale frames and IMU.
 Then copy the [rovio_davis_cvpr_live.launch](/rovio_launch/rovio_davis_cvpr_live.launch) file into your local ROVIO `launch` directory. 
 
