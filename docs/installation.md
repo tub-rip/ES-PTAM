@@ -20,16 +20,27 @@ The code has been tested on ROS Noetic. Depending on the ROS distribution you in
 	cd catkin_ws/src
 	git clone git@github.com:tub-rip/ES-PTAM.git
 
-Install catkin dependencies specified in [dependencies.yaml](/dependencies.yaml):
+Download catkin dependencies specified in [dependencies.yaml](/dependencies.yaml):
 
 	cd catkin_ws/src
 	sudo apt-get install python3-vcstool
 	vcs-import < ES-PTAM/dependencies.yaml
 
+Install dependencies for using live (DAVIS) cameras
+
+	sudo add-apt-repository ppa:inivation-ppa/inivation
+ 	sudo apt-get update
+  	sudo apt-get install libcaer-dev
+
+Install `python-2.7` required for [vikit_py](https://github.com/uzh-rpg/rpg_vikit/tree/master/vikit_py).
+
+	sudo apt-get install python2.7
+
 Additional ROS tools needed (if not already installed):
 
 	sudo apt-get install ros-noetic-image-geometry
 	sudo apt-get install ros-noetic-tf-conversions
+ 	sudo apt-get install ros-noetic-camera-info-manager
 
 ## Compiling
 
