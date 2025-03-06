@@ -8,7 +8,9 @@ find_package(catkin_simple REQUIRED COMPONENTS
                 tf_conversions
                 eigen_conversions
                 image_transport
-                vicon)
+                vicon
+                message_generation
+                std_msgs)
 catkin_simple(ALL_DEPS_REQUIRED)
 
 set(CMAKE_BUILD_TYPE RelWithDebInfo) # Release, RelWithDebInfo

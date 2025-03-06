@@ -15,6 +15,7 @@
 * 10587 Berlin, Germany
 */
 
+#include <dsi_msgs/dsi.h>
 #include <dvs_msgs/Event.h>
 #include <dvs_msgs/EventArray.h>
 #include <mapper_emvs_stereo/mapper_emvs_stereo.hpp>
@@ -42,6 +43,7 @@
 #include <nav_msgs/Odometry.h>
 #include <std_msgs/Bool.h>
 #include <std_msgs/String.h>
+#include <std_msgs/Float32MultiArray.h>
 
 #include <thread>
 
@@ -143,9 +145,11 @@ public:
   void mappingLoop();
   void Finish();
   void publishMsgs(std::string frame_id);
+  void publishDSI(std::string frame_id);
   void projectPointCloudAndPublish(ros::Time ts, geometry_utils::Transformation& T);
 //  bool getPoseAt(const ros::Time& t, std::string frame_id, geometry_utils::Transformation& T);
   void copilotCallback(const std_msgs::Bool& msg);
+  void derdCallback(const sensor_msgs::ImageConstPtr& msg);
 
   bool FLAG_EXIT;
 
@@ -166,12 +170,14 @@ private:
   ros::Subscriber stampedPose_sub_;
   ros::Subscriber copilot_sub_;
   ros::Subscriber remote_key_;
+  image_transport::Subscriber derd_depth_sub_;
 
   // Publishers
-  ros::Publisher pc_pub_, pc_global_pub_;
-  image_transport::Publisher invDepthMap_pub_;
+  ros::Publisher pc_pub_, pc_global_pub_, dsi_pub_;
+  image_transport::Publisher invDepthMap_pub_, derd_depth_pub_;
   image_transport::Publisher conf_map_pub_, conf_map0_pub_, conf_map1_pub_, conf_map2_pub_;
   image_transport::Publisher ev_img_pub_;
+  image_transport::Publisher mask_pub_;
   image_transport::Publisher proj_pub_;
   image_transport::ImageTransport it_;
   tf::TransformBroadcaster broadcaster_;
@@ -245,12 +251,15 @@ private:
   cv::Mat event_image0_, event_image1_, event_image_live_;
 
   ros::Time latest_tf_stamp_;
+  ros::Time latest_derd_depth_ts_;
 
   enum MapperState {MAPPING, IDLE};
   MapperState state_;
 
   float max_duration_, min_duration_, init_wait_t_;
   bool auto_copilot_;
+
+  std::vector<float> dsi_;
 
 };
 

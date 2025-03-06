@@ -18,6 +18,7 @@
 #include <mapper_emvs_stereo/mapper.hpp>
 // #define TRI
 // #define DEBUG_CONF
+# define DERD
 
 onlineMapper::onlineMapper(const ros::NodeHandle &nh,
                            const ros::NodeHandle &nh_private):
@@ -36,7 +37,7 @@ onlineMapper::onlineMapper(const ros::NodeHandle &nh,
     latest_tf_stamp_ = ros::Time(0);
 
     nh.param<std::string>("dvs_frame_id", regular_frame_id_, std::string("dvs0"));
-    nh.param<std::string>("dvs_bootstrap_frame_id", bootstrap_frame_id_, regular_frame_id_);
+    nh.param<std::string>("dvs_bootstrap_frame_id", bootstrap_frame_id_, std::string("camera0"));
     frame_id_ = bootstrap_frame_id_;
     nh.param<std::string>("world_frame_id", world_frame_id_ , "world");
     nh.param<bool>("auto_trigger", auto_trigger_, true);
@@ -65,8 +66,8 @@ onlineMapper::onlineMapper(const ros::NodeHandle &nh,
     //  nh.param<double>("radius_search", radius_search, 0.05);
     //  nh.param<int>("min_num_negihbors", min_num_negihbors, 3);
 
-      nh.param<std::string>("calib_path", calib_path, std::string("./"));
-      nh.param<std::string>("mocap_calib_path", mocap_calib_path, std::string("./"));
+    nh.param<std::string>("calib_path", calib_path, std::string("./"));
+    nh.param<std::string>("mocap_calib_path", mocap_calib_path, std::string("./"));
     //  nh.param<std::string>("calib_type", calib_type, "yaml");
     //  nh.param<int>("process_method", process_method, 1);
     //  nh.param<int>("num_intervals", num_intervals, 2);
@@ -87,6 +88,8 @@ onlineMapper::onlineMapper(const ros::NodeHandle &nh,
     remote_key_ = nh_.subscribe("/evo/remote_key", 0, &onlineMapper::remoteKeyCallback, this);
     LOG(INFO) << "Subscribing to event topic left: " << FLAGS_event_topic0;
 
+    derd_depth_sub_ = it_.subscribe("/derd_depth", 1, &onlineMapper::derdCallback, this);
+
     // TF
     tf_ = std::make_shared<tf::Transformer>(true, ros::Duration(100));
     tf_->setUsingDedicatedThread(true);
@@ -94,10 +97,14 @@ onlineMapper::onlineMapper(const ros::NodeHandle &nh,
     // result publishers
     proj_pub_ = it_.advertise("projected_pointcloud", 1);
     invDepthMap_pub_ = it_.advertise("Inverse_Depth_Map", 1);
+    derd_depth_pub_ = it_.advertise("derd_Inverse_Depth_Map", 1);
     conf_map_pub_ = it_.advertise("Confidence_Map", 1);
     ev_img_pub_ = it_.advertise("event_image0", 1);
+    mask_pub_ = it_.advertise("mask", 1);
     pc_pub_ = nh_.advertise<EMVS::PointCloud>("pointcloud_local", 1);
     pc_global_pub_ = nh_.advertise<EMVS::PointCloud>("pointcloud_global", 1);
+
+    dsi_pub_ = nh_.advertise<dsi_msgs::dsi>("dsi", 1);
 
 #ifdef DEBUG_CONF
     conf_map0_pub_ = it_.advertise("Confidence_Map0", 1);
@@ -309,7 +316,7 @@ void onlineMapper::mappingLoop(){
         //        LOG(INFO) << (latest_tf_stamp_ - current_ts_).toSec();
 
         if (auto_trigger_ && initialized_ && !map_initialized && (latest_tf_stamp_ - current_ts_).toSec() > init_wait_t_) {
-            LOG(INFO) << "GENERATING INITIAL MAP AUTOMATICALLY.";
+//            LOG(INFO) << "GENERATING INITIAL MAP AUTOMATICALLY.";
             state_ = MAPPING;
         }
         // LOG(INFO) << state_;
@@ -439,8 +446,23 @@ void onlineMapper::MappingAtTime(ros::Time current_ts, std::vector<dvs_msgs::Eve
         exit(0);
     }
 
+#ifdef DERD
+   dsi_ = mapper_fused.dsi_.getDSI();
+    publishDSI(frame_id);
+    while(latest_derd_depth_ts_<current_ts){
+//        LOG(INFO)<< "Waiting to receive depth map from DERD-Net!!!!!!!!!!!!!!!!!!!!!!!!";
+    }
+    semidense_mask = depth_map>0;
+
+    cv::Mat depth_map_dummy;
+#elif
+
     // Convert DSI to depth maps using argmax and noise filtering
     mapper_fused.getDepthMapFromDSI(depth_map, confidence_map, semidense_mask, opts_depth_map);
+#endif
+    double min, max;
+    cv::minMaxLoc(depth_map, &min, &max);
+    LOG(INFO)<< "depth range is: "<< min << " - " << max << "meters";
     //    mapper0.getDepthMapFromDSI(depth_map, confidence_map, semidense_mask, opts_depth_map);
 
     // Convert semi-dense depth map to point cloud
@@ -456,9 +478,25 @@ void onlineMapper::MappingAtTime(ros::Time current_ts, std::vector<dvs_msgs::Eve
     mapper1.getDepthMapFromDSI(dummy, confidence_map_1, dummy, opts_depth_map);
     mapper2.getDepthMapFromDSI(dummy, confidence_map_2, dummy, opts_depth_map);
 #endif
+        publishMsgs(frame_id);
 
-    publishMsgs(frame_id);
+}
 
+void onlineMapper::publishDSI(std::string frame_id){
+    dsi_msgs::dsi dsi_msg;
+    dsi_msg.data.data = dsi_;
+    dsi_msg.header.stamp = ros::Time(current_ts_);
+    dsi_msg.header.frame_id = frame_id;
+    //    dim[0].label  = "height";
+    //    dim[0].size   = confidence_map.size[0];
+    //    dim[0].stride = 3*640*480 = 921600  (note dim[0] stride is just size of image)
+    //# dim[1].label  = "width"
+    //# dim[1].size   = 640
+    //# dim[1].stride = 3*640 = 1920
+    //# dim[2].label  = "channel"
+    //# dim[2].size   = 3
+    //# dim[2].stride = 3
+    dsi_pub_.publish(dsi_msg);
 }
 
 void onlineMapper::publishMsgs(std::string frame_id){
@@ -470,6 +508,13 @@ void onlineMapper::publishMsgs(std::string frame_id){
     cv_ptr->header.frame_id = frame_id;
     cv_ptr->image = event_image0_;
     ev_img_pub_.publish(cv_ptr->toImageMsg());
+
+//    cv_bridge::CvImagePtr cv_ptr_mask(new cv_bridge::CvImage);
+//    cv_ptr_mask->encoding = "mono8";
+//    cv_ptr_mask->header.stamp = ros::Time(current_ts_);
+//    cv_ptr_mask->header.frame_id = "/map";
+//    cv_ptr_mask->image = semidense_mask;
+//    mask_pub_.publish(cv_ptr_mask->toImageMsg());
 
     if (invDepthMap_pub_.getNumSubscribers() > 0 || conf_map_pub_.getNumSubscribers() > 0) {
 
@@ -509,12 +554,12 @@ void onlineMapper::publishMsgs(std::string frame_id){
         cv_ptr->image = invdepth_on_canvas;
         invDepthMap_pub_.publish(cv_ptr->toImageMsg());
 
-        cv_bridge::CvImagePtr cv_ptr2(new cv_bridge::CvImage);
-        cv_ptr2->encoding = "mono8";
-        cv_ptr2->header.stamp = ros::Time(current_ts_);
-        cv_ptr2->header.frame_id = "/map";
-        cv_ptr2->image = 255 - confidence_map_255;
-        conf_map_pub_.publish(cv_ptr2->toImageMsg());
+//        cv_bridge::CvImagePtr cv_ptr2(new cv_bridge::CvImage);
+//        cv_ptr2->encoding = "mono8";
+//        cv_ptr2->header.stamp = ros::Time(current_ts_);
+//        cv_ptr2->header.frame_id = "/map";
+//        cv_ptr2->image = 255 - confidence_map_255;
+//        conf_map_pub_.publish(cv_ptr2->toImageMsg());
 
 #ifdef DEBUG_CONF
 
@@ -567,5 +612,21 @@ void onlineMapper::publishMsgs(std::string frame_id){
             LOG(INFO) << "Clearing global PC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
             pc_global_->clear();
         }
+    }
+}
+
+void onlineMapper::derdCallback(const sensor_msgs::ImageConstPtr& msg)
+{
+    try
+    {
+        LOG(INFO) << "Received depth map from DERD";
+        // Convert ROS image message to OpenCV Mat
+        cv::Mat derd_depth = cv_bridge::toCvCopy(msg)->image;
+        depth_map = derd_depth;
+        latest_derd_depth_ts_ = msg->header.stamp;
+    }
+    catch (cv_bridge::Exception& e)
+    {
+        ROS_ERROR("cv_bridge exception: %s", e.what());
     }
 }

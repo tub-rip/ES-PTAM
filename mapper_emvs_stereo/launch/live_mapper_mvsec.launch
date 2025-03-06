@@ -1,0 +1,16 @@
+<launch>
+
+    <param name="num_ev_per_map" value="200000" />
+    <param name="on_demand" value="true" />    
+    <param name="max_duration" value="4" />
+    <param name="min_duration" value="0.1" />
+    <param name="init_wait_time" value="0.5" />
+    <param name="auto_copilot" value="false"/>
+        <param name="calib_path" value="$(find mapper_emvs_stereo)/calib/mvsec/calib_in_flying/camchain-imucam-indoor_flying.yaml"/>
+    <!-- Mapping module -->
+    <node pkg="mapper_emvs_stereo" type="run_emvs" name="run_emvs" output="screen" args="--flagfile $(find mapper_emvs_stereo)/cfg/tracker/alg1/flying1.conf">
+	<remap from="pointcloud_local" to="/dvs_mapping/pointcloud" /> 
+	<remap from="pointcloud_global" to="/dvs_mapping/pointcloud_global" />
+	<remap from="Inverse_Depth_Map" to="/dvs_mapping/depthmap" />  
+    </node>
+</launch>

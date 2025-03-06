@@ -28,6 +28,7 @@
   <depend>vicon</depend>
   <depend>image_transport</depend>
   <depend>minkindr_conversions</depend>
+  <depend>dsi_msgs</depend>
   <export>
 
   </export>

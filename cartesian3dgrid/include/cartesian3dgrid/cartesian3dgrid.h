@@ -239,6 +239,10 @@ public:
         return &data_array_.data()[layer * size_[0] * size_[1]];
     }
 
+    std::vector<float> getDSI(){
+        return data_array_;
+    }
+
 private:
     std::vector<float> data_array_;
     unsigned int numCells_;
