@@ -1,6 +1,6 @@
 # ES-PTAM: Event-based Stereo Parallel Tracking and Mapping
 
-Official repository for [**ES-PTAM: Event-based Stereo Parallel Tracking and Mapping**](https://arxiv.org/pdf/2408.15605), by [Suman Ghosh](https://www.linkedin.com/in/suman-ghosh-a8762576/), [Valentina Cavinato](https://ch.linkedin.com/in/valentina-cavinato) and [Guillermo Gallego](https://sites.google.com/view/guillermogallego), published at the **European Conference on Computer Vision (ECCV) Workshops 2024** Milan, Italy.
+Official repository for [**ES-PTAM: Event-based Stereo Parallel Tracking and Mapping**](https://arxiv.org/pdf/2408.15605), by [Suman Ghosh](https://www.linkedin.com/in/suman-ghosh-a8762576/), [Valentina Cavinato](https://ch.linkedin.com/in/valentina-cavinato) and [Guillermo Gallego](http://www.guillermogallego.es), published at the **European Conference on Computer Vision (ECCV) Workshops 2024** Milan, Italy.
 <h2 align="left">
   
 [Paper](https://arxiv.org/pdf/2408.15605) | [Video](https://youtu.be/z7J3lZOYwKs) | [Poster](/docs/esptam_eccvw_2024_poster_v3.pdf)
@@ -60,7 +60,11 @@ Related works
    
 Additional Resources on Event-based Vision
 -------
-* [Research page (TU Berlin RIP lab)](https://sites.google.com/view/guillermogallego/research/event-based-vision)
+
+* [Event Collapse in Contrast Maximization Frameworks](https://github.com/tub-rip/event_collapse)
+* [Motion-prior Contrast Maximization (ECCV 2024)](https://github.com/tub-rip/MotionPriorCMax)
+* [CMax-SLAM (TRO 2024)](https://github.com/tub-rip/cmax_slam)
+* [Research page (TU Berlin, RIP lab)](https://sites.google.com/view/guillermogallego/research/event-based-vision)
 * [Course at TU Berlin](https://sites.google.com/view/guillermogallego/teaching/event-based-robot-vision)
 * [Event-based Vision: A Survey](http://rpg.ifi.uzh.ch/docs/EventVisionSurvey.pdf)
 * [List of Resources](https://github.com/uzh-rpg/event-based_vision_resources)
