@@ -1,6 +1,6 @@
 # ES-PTAM: Event-based Stereo Parallel Tracking and Mapping
 
-Official repository for [**ES-PTAM: Event-based Stereo Parallel Tracking and Mapping**](http://doi.org/10.1007/978-3-031-92460-6_5), by [Suman Ghosh](https://www.linkedin.com/in/suman-ghosh-a8762576/), [Valentina Cavinato](https://ch.linkedin.com/in/valentina-cavinato) and [Guillermo Gallego](http://www.guillermogallego.es), published at the **European Conference on Computer Vision (ECCV) Workshops 2024** Milan, Italy.
+Official repository for [**ES-PTAM: Event-based Stereo Parallel Tracking and Mapping**](http://doi.org/10.1007/978-3-031-92460-6_5), by [Suman Ghosh](https://www.linkedin.com/in/suman-ghosh-a8762576/), [Valentina Cavinato](https://ch.linkedin.com/in/valentina-cavinato) and [Guillermo Gallego](http://www.guillermogallego.es), published at the **European Conference on Computer Vision (ECCV) Workshops 2024** Milan, Italy, and **demoed at ECCV 2024**.
 <h2 align="left">
   
 [Paper](https://arxiv.org/pdf/2408.15605) | [Video](https://youtu.be/z7J3lZOYwKs) | [Poster](/docs/esptam_eccvw_2024_poster_v3.pdf)
@@ -18,7 +18,9 @@ If you use this work in your research, please cite it as follows:
   author = {Suman Ghosh and Valentina Cavinato and Guillermo Gallego},  
   title = {{ES-PTAM}: Event-based Stereo Parallel Tracking and Mapping},
   booktitle = {European Conference on Computer Vision (ECCV) Workshops},
-  year = {2024}
+  year = {2024},
+  pages = {70--87},
+  doi = {10.1007/978-3-031-92460-6\_5}
 }
 ```
 
@@ -55,8 +57,9 @@ The license is available [here](Software%20License%20Agreement_TUB_ES_PTAM_final
 Related works
 -------
 * **[Event-based Stereo Depth Estimation: A Survey](https://arxiv.org/pdf/2409.17680)**
-* **[MC-EMVS: Multi-Event-Camera Depth Estimation and Outlier Rejection by Refocused Events Fusion](https://github.com/tub-rip/dvs_mcemvs)**
-* [EVO: Event based Visual Odometry](https://github.com/uzh-rpg/rpg_dvs_evo_open/)
+* **[MC-EMVS: Multi-Event-Camera Depth Estimation and Outlier Rejection by Refocused Events Fusion (AISY 2022)](https://github.com/tub-rip/dvs_mcemvs)**
+* [EVO: Event based Visual Odometry (RAL 2017)](https://github.com/uzh-rpg/rpg_dvs_evo_open/)
+* [ESVO2: Direct Visual-Inertial Odometry with Stereo Event Cameras (TRO 2025)](https://github.com/NAIL-HNU/ESVO2)
    
 Additional Resources on Event-based Vision
 -------
